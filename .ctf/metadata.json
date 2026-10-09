@@ -4,12 +4,5 @@
   "question": "Retrieve the flag from the chat site.",
   "category": "WEB",
   "difficulty": 3,
-  "evidence_kind": "SECRET",
-  "capabilities": [
-    "log4j",
-    "lookup-injection",
-    "java",
-    "flask",
-    "information-disclosure"
-  ]
+  "evidence_kind": "SECRET"
 }
