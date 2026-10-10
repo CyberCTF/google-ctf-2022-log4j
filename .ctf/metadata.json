@@ -1,7 +1,7 @@
 {
   "title": "Google CTF 2022: Log4j",
   "description": "A chat page whose Flask backend runs a Java chatbot for every message; the bot logs its arguments with Log4j 2 and keeps the flag in an environment variable. The JNDI lookups of Log4Shell are not the way out.",
-  "question": "Retrieve the flag from the chat site.",
+  "question": "Make the chatbot's Log4j logging reveal the FLAG environment variable.",
   "category": "WEB",
   "difficulty": 3,
   "evidence_kind": "SECRET"

@@ -3,6 +3,9 @@
 # - the COPY sources point into app/ (this folder is the build context);
 # - Werkzeug is pinned to 2.1.2, the release that matches the pinned Flask 2.1.2: upstream's
 #   requirements.txt leaves it floating, and Werkzeug 3 removed url_quote, so Flask fails to start.
+# - CyberCTF: /usr/bin/java becomes a wrapper that exports FLAG from /ctf/flag (the player's flag,
+#   written by ctf/flag.sh at every start) before running Java, so the chatbot holds the player's
+#   flag in its environment as upstream intends; without the file, upstream's nsjail value.
 # Everything else is upstream's, line for line.
 
 FROM ubuntu:20.04 as chroot
@@ -21,6 +24,9 @@ RUN pip install -r /home/user/requirements.txt werkzeug==2.1.2
 COPY app/chatbot /home/user/chatbot
 WORKDIR /home/user/chatbot
 RUN mvn clean package shade:shade
+RUN real="$(readlink -f /usr/bin/java)" && rm /usr/bin/java && \
+    printf '#!/bin/sh\nif [ -s /ctf/flag ]; then FLAG="$(cat /ctf/flag)"; export FLAG; fi\nexec %s "$@"\n' "$real" > /usr/bin/java && \
+    chmod 755 /usr/bin/java
 
 FROM gcr.io/kctf-docker/challenge@sha256:d884e54146b71baf91603d5b73e563eaffc5a42d494b1e32341a5f76363060fb
 

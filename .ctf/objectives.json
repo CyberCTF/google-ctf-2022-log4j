@@ -1,0 +1,69 @@
+{
+  "objectives": [
+    {
+      "key": "main",
+      "title": "Leak the flag",
+      "prompt": "Make the chatbot's logging reveal the FLAG environment variable.",
+      "check": {
+        "evidence": "SECRET",
+        "format": "CTF{%s}"
+      },
+      "dev": "CTF{dev-google-ctf-2022-log4j}",
+      "hints": [
+        "Everything you send is logged by Log4j 2, and JNDI is not the way: think about the other lookups.",
+        "The page only shows some output. Which messages of the chatbot do reach you?"
+      ],
+      "steps": [
+        {
+          "key": "library",
+          "title": "Identify the logger",
+          "prompt": "Which Java logging library records the chat messages?",
+          "check": {
+            "answer": [
+              "log4j",
+              "log4j2",
+              "log4j 2",
+              "apache log4j"
+            ]
+          }
+        },
+        {
+          "key": "feature",
+          "title": "Name the feature",
+          "prompt": "Which Log4j feature expands expressions written inside logged text?",
+          "check": {
+            "answer": [
+              "lookups",
+              "lookup",
+              "message lookups",
+              "property substitution",
+              "string substitution"
+            ]
+          }
+        },
+        {
+          "key": "source",
+          "title": "Find the source",
+          "prompt": "Which kind of lookup reads environment variables? (its prefix)",
+          "check": {
+            "answer": [
+              "env",
+              "environment",
+              "environment lookup"
+            ]
+          }
+        },
+        {
+          "key": "variable",
+          "title": "Find the variable",
+          "prompt": "Which environment variable holds the flag?",
+          "check": {
+            "answer": [
+              "flag"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
