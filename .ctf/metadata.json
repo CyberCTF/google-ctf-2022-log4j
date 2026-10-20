@@ -1,8 +1,11 @@
 {
+  "project_name": "cyberlabs-google-ctf-2022-log4j",
+  "slug": "google-ctf-2022-log4j",
   "title": "Google CTF 2022: Log4j",
   "description": "A chat page whose Flask backend runs a Java chatbot for every message; the bot logs its arguments with Log4j 2 and keeps the flag in an environment variable. The JNDI lookups of Log4Shell are not the way out.",
-  "question": "Make the chatbot's Log4j logging reveal the FLAG environment variable.",
-  "category": "WEB",
+  "category": "web",
   "difficulty": 3,
-  "evidence_kind": "SECRET"
+  "evidence_kind": "SECRET",
+  "capabilities": [],
+  "question": "Make the chatbot's Log4j logging reveal the FLAG environment variable."
 }
