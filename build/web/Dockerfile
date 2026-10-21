@@ -35,4 +35,4 @@ COPY --from=chroot / /chroot
 COPY app/nsjail.cfg /home/user/
 
 CMD kctf_setup && \
-    (kctf_drop_privs nsjail --config /home/user/nsjail.cfg -- /bin/bash start.sh)
+    (nsjail --config /home/user/nsjail.cfg -- /bin/bash start.sh)
